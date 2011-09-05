@@ -2,7 +2,7 @@ package ch.ethz.ruediste.lpf.event;
 
 import java.util.HashSet;
 
-public class StrongEvent<T>{
+public class StrongEvent<T> implements IStrongEvent<T>{
 
 	private HashSet<IEventHandler<T>> handlers=new HashSet<IEventHandler<T>>();
 	
@@ -12,10 +12,18 @@ public class StrongEvent<T>{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.ethz.ruediste.lpf.event.IStrongEvent#register(ch.ethz.ruediste.lpf.event.IEventHandler)
+	 */
+	@Override
 	public void register(IEventHandler<T> handler) {
 		handlers.add(handler);
 	}
 	
+	/* (non-Javadoc)
+	 * @see ch.ethz.ruediste.lpf.event.IStrongEvent#deregister(ch.ethz.ruediste.lpf.event.IEventHandler)
+	 */
+	@Override
 	public void deregister(IEventHandler<T> handler){
 		handlers.remove(handler);
 	}

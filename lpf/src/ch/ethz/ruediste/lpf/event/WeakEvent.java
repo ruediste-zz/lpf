@@ -2,7 +2,7 @@ package ch.ethz.ruediste.lpf.event;
 
 import java.util.WeakHashMap;
 
-public class WeakEvent<T>{
+public class WeakEvent<T> implements IWeakEvent<T>{
 
 	private WeakHashMap<IEventHandler<T>,IWeakEventListener> handlers=new WeakHashMap<IEventHandler<T>, IWeakEventListener>();
 	public void raise(Object sender, T args) {
@@ -13,6 +13,10 @@ public class WeakEvent<T>{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see ch.ethz.ruediste.lpf.event.IWeakEvent#register(ch.ethz.ruediste.lpf.event.IWeakEventListener, ch.ethz.ruediste.lpf.event.IEventHandler)
+	 */
+	@Override
 	public void register(IWeakEventListener listener, IEventHandler<T> handler) {
 		// register handler
 		handlers.put(handler,listener);
@@ -23,6 +27,10 @@ public class WeakEvent<T>{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see ch.ethz.ruediste.lpf.event.IWeakEvent#deregister(ch.ethz.ruediste.lpf.event.IEventHandler)
+	 */
+	@Override
 	public void deregister(IEventHandler<T> handler){
 		// check if handler has been registered
 		if (!handlers.containsKey(handler))

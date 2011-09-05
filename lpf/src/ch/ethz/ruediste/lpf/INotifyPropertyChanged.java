@@ -1,7 +1,7 @@
 package ch.ethz.ruediste.lpf;
 
-import ch.ethz.ruediste.lpf.event.WeakEvent;
+import ch.ethz.ruediste.lpf.event.IWeakEvent;
 
 public interface INotifyPropertyChanged {
-	public WeakEvent<PropertyChangedEventArgs> getPropertyChangedEvent(); 
+	public IWeakEvent<PropertyChangedEventArgs> getPropertyChangedEvent(); 
 }
