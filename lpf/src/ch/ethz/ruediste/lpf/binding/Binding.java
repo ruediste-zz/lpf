@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import ch.ethz.ruediste.lpf.event.IEventHandler;
+import ch.ethz.ruediste.lpf.event.IWeakEventListener;
 
 public class Binding {
 
@@ -13,12 +14,15 @@ public class Binding {
 	private Method sourceSetter;
 	private Method targetSetter;
 
-	public Binding(Object source, String sourcePath, Object target, String targetPath, BindingMode mode) {
+	public Binding(IWeakEventListener listener, Object source, String sourcePath, Object target, String targetPath, BindingMode mode) {
 		this.mode=mode;
 		
 		// build hop chain
 		sourceHop=buildHops(source.getClass(), sourcePath);
 		targetHop=buildHops(target.getClass(), targetPath);
+		
+		sourceHop.setSource(source);
+		targetHop.setSource(target);
 		
 		// obtain target setter
 		if (isUpdateTarget()){

@@ -6,7 +6,11 @@ import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import ch.ethz.ruediste.lpf.event.IStrongEvent;
+import ch.ethz.ruediste.lpf.event.StrongEvent;
 
 public class Window {
 
@@ -21,7 +25,7 @@ public class Window {
 			
 			if (content!=null){
 				content.measure(new Size(getWidth(),getHeight()));
-				content.arrange(new Rectangle2D.Double(0,0,getWidth(),getHeight()));
+				content.arrange(new Size(getWidth(),getHeight()));
 				
 				content.paint((Graphics2D) g);
 			}
@@ -31,6 +35,8 @@ public class Window {
 	
 	private Frame frame=new Frame();
 	private Canvas canvas=new MyCanvas();
+	private final StrongEvent<WindowEvent> windowClosingEvent
+		=new StrongEvent<WindowEvent>();
 	
 	private IUIElement content;
 
@@ -40,6 +46,49 @@ public class Window {
 		//frame.add(new Label("Demo",Label.CENTER));
 		canvas.setSize(100,100);
 		frame.add(canvas,BorderLayout.CENTER);
+		frame.addWindowListener(new WindowListener() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowIconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeiconified(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				windowClosingEvent.raise(this, e);
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void windowActivated(WindowEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
 	public void setContent(IUIElement content) {
@@ -57,5 +106,9 @@ public class Window {
 
 	public void setContent(UntypedCreator creator) {
 		content=creator.getElement();
+	}
+
+	public IStrongEvent<WindowEvent> getWindowClosingEvent() {
+		return windowClosingEvent;
 	}
 }

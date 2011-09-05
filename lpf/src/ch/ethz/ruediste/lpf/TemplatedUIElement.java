@@ -1,9 +1,8 @@
 package ch.ethz.ruediste.lpf;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 
-public class TemplatedUIElement<T> extends UIElement<T>{
+public class TemplatedUIElement<T> extends UIElement<T> {
 
 	private Template<T> template;
 	private IUIElement templateInstantiation;
@@ -13,20 +12,20 @@ public class TemplatedUIElement<T> extends UIElement<T>{
 		// paint instatiated template
 		getTemplateInstantiation().paint(g);
 	}
-	
+
 	@Override
 	public Size measureOverride(Size availableSize) {
 		return getTemplateInstantiation().measure(availableSize);
 	}
-	
+
 	@Override
-	public void arrangeOverride(Rectangle2D position) {
-		getTemplateInstantiation().arrange(position);
+	public void arrangeOverride(Size actualSize) {
+		getTemplateInstantiation().arrange(actualSize);
 	}
-	
+
 	public void setTemplate(Template<T> template) {
 		this.template = template;
-		this.templateInstantiation=null;
+		this.templateInstantiation = null;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -40,11 +39,11 @@ public class TemplatedUIElement<T> extends UIElement<T>{
 
 	private IUIElement getTemplateInstantiation() {
 		// check if the template has been instantiated
-		if (templateInstantiation==null){
+		if (templateInstantiation == null) {
 			// instantiate template
-			templateInstantiation=template.instantiate(thiss());
+			templateInstantiation = template.instantiate(thiss());
 		}
-		
+
 		return templateInstantiation;
 	}
 
