@@ -3,9 +3,9 @@ package ch.ethz.ruediste.lpf.elements;
 import java.awt.Graphics2D;
 
 import ch.ethz.ruediste.lpf.IUIElement;
-import ch.ethz.ruediste.lpf.Size;
 import ch.ethz.ruediste.lpf.Template;
 import ch.ethz.ruediste.lpf.UIElement;
+import ch.ethz.ruediste.lpf.shape.IShape;
 import static ch.ethz.ruediste.lpf.elements.ElementCreator.*;
 
 public class ContentPresenterBase<T extends ContentPresenterBase<T>> extends UIElement<T>{
@@ -42,12 +42,12 @@ public class ContentPresenterBase<T extends ContentPresenterBase<T>> extends UIE
 	}
 
 	@Override
-	public Size measureOverride(Size availableSize) {
+	public IShape measureOverride(IShape availableSize) {
 		return getTemplateInstance().measure(availableSize);
 	}
 
 	@Override
-	public void arrangeOverride(Size actualSize) {
+	public void arrangeOverride(IShape actualSize) {
 		getTemplateInstance().arrange(actualSize);
 	}
 	

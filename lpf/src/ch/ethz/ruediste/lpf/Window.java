@@ -11,6 +11,7 @@ import java.awt.event.WindowListener;
 
 import ch.ethz.ruediste.lpf.event.IStrongEvent;
 import ch.ethz.ruediste.lpf.event.StrongEvent;
+import ch.ethz.ruediste.lpf.shape.Rectangle;
 
 public class Window {
 
@@ -24,8 +25,8 @@ public class Window {
 		public void paint(Graphics g) {
 			
 			if (content!=null){
-				content.measure(new Size(getWidth(),getHeight()));
-				content.arrange(new Size(getWidth(),getHeight()));
+				content.measure(new Rectangle(getWidth(),getHeight()));
+				content.arrange(new Rectangle(getWidth(),getHeight()));
 				
 				content.paint((Graphics2D) g);
 			}

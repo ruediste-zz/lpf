@@ -2,6 +2,8 @@ package ch.ethz.ruediste.lpf;
 
 import java.awt.Graphics2D;
 
+import ch.ethz.ruediste.lpf.shape.IShape;
+
 public class TemplatedUIElement<T> extends UIElement<T> {
 
 	private Template<T> template;
@@ -14,12 +16,12 @@ public class TemplatedUIElement<T> extends UIElement<T> {
 	}
 
 	@Override
-	public Size measureOverride(Size availableSize) {
+	public IShape measureOverride(IShape availableSize) {
 		return getTemplateInstantiation().measure(availableSize);
 	}
 
 	@Override
-	public void arrangeOverride(Size actualSize) {
+	public void arrangeOverride(IShape actualSize) {
 		getTemplateInstantiation().arrange(actualSize);
 	}
 

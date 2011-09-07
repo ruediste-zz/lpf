@@ -3,17 +3,18 @@ package ch.ethz.ruediste.lpf;
 import java.awt.Graphics2D;
 
 import ch.ethz.ruediste.lpf.event.IWeakEventListener;
+import ch.ethz.ruediste.lpf.shape.IShape;
 
 public interface IUIElement extends IWeakEventListener {
 
 	public void paint(Graphics2D g);
 
-	public Size measure(Size size);
+	public IShape measure(IShape availableShape);
 
-	public void arrange(Size actualSize);
+	public void arrange(IShape actualShape);
 
-	public Size getActualSize();
+	public IShape getActualShape();
 
-	public Size getDesiredSize();
+	public IShape getDesiredShape();
 
 }

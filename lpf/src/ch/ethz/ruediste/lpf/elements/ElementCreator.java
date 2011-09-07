@@ -1,13 +1,18 @@
 package ch.ethz.ruediste.lpf.elements;
 
+import java.awt.Color;
+
 import ch.ethz.ruediste.lpf.ContentElement;
 import ch.ethz.ruediste.lpf.Creator;
 import ch.ethz.ruediste.lpf.EventHandler;
 import ch.ethz.ruediste.lpf.IUIElement;
+import ch.ethz.ruediste.lpf.Length;
 import ch.ethz.ruediste.lpf.Template;
 import ch.ethz.ruediste.lpf.UntypedCreator;
 import ch.ethz.ruediste.lpf.binding.Binding;
 import ch.ethz.ruediste.lpf.binding.BindingMode;
+import ch.ethz.ruediste.lpf.elements.ElementCreator.BorderCreator;
+import ch.ethz.ruediste.lpf.elements.ElementCreator.BorderCreatorBase;
 
 public class ElementCreator {
 
@@ -44,6 +49,20 @@ public class ElementCreator {
 	}
 
 	public static class BorderCreatorBase<Telement extends BorderBase<Telement>, T extends Creator<?,T>> extends ContentElementCreatorBase<Telement,T>{
+		public T setBorderWidth(double value, double glue) {
+			element.setBorderWidth(new Length(value,glue));
+			return thiss();
+		}
+		
+		public T setColor(Color color) {
+			element.setColor(color);
+			return thiss();
+		}
+		
+		public T setBackground(Color background) {
+			element.setBackground(background);
+			return thiss();
+		}
 	}
 	public static class BorderCreator extends BorderCreatorBase<Border,BorderCreator>{
 		public BorderCreator(){
