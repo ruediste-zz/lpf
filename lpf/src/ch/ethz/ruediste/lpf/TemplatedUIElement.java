@@ -27,7 +27,7 @@ public class TemplatedUIElement<T> extends UIElement<T> {
 
 	public void setTemplate(Template<T> template) {
 		this.template = template;
-		this.templateInstantiation = null;
+		setTemplateInstantiation(null);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -43,10 +43,19 @@ public class TemplatedUIElement<T> extends UIElement<T> {
 		// check if the template has been instantiated
 		if (templateInstantiation == null) {
 			// instantiate template
-			templateInstantiation = template.instantiate(thiss());
+			setTemplateInstantiation(template.instantiate(thiss()));
 		}
 
 		return templateInstantiation;
 	}
 
+	private void setTemplateInstantiation(IUIElement instance){
+		if (this.templateInstantiation!=null){
+			parentChildAssociation.unset(this, this.templateInstantiation);
+		}
+		this.templateInstantiation=instance;
+		if (this.templateInstantiation!=null){
+			parentChildAssociation.set(this, this.templateInstantiation);
+		}
+	}
 }

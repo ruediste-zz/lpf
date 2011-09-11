@@ -20,10 +20,20 @@ public class ContentPresenterBase<T extends ContentPresenterBase<T>> extends UIE
 	public void setContent(Object content) {
 		if (this.content!=content){
 			this.content = content;
-			templateInstance=null;
+			setTemplateInstance(null);
 		}
 	}
 
+	private void setTemplateInstance(IUIElement instance){
+		if (this.templateInstance!=null){
+			parentChildAssociation.unset(this, this.templateInstance);
+		}
+		this.templateInstance=instance;
+		if (this.templateInstance!=null){
+			parentChildAssociation.set(this,this.templateInstance);
+		}
+	}
+	
 	private Template<?> findTemplate(Object content) {
 		return new Template<Object>() {
 
@@ -55,9 +65,14 @@ public class ContentPresenterBase<T extends ContentPresenterBase<T>> extends UIE
 	private IUIElement getTemplateInstance(){
 		if (templateInstance!=null)
 			return templateInstance;
-		Template<?> template=this.template;
-		if (template==null) template=findTemplate(content);
-		templateInstance=((Template)template).instantiate(content);
+		
+		// get the template, doing default lookup if necessary
+		Template<?> tmpTemplate=this.template;
+		if (tmpTemplate==null) tmpTemplate=findTemplate(content);
+		
+		// instantiate template
+		setTemplateInstance(((Template)tmpTemplate).instantiate(content));
+		
 		return templateInstance;
 	}
 }
