@@ -1,6 +1,5 @@
 package ch.ethz.ruediste.lpf.shape;
 
-import java.lang.reflect.TypeVariable;
 import java.util.HashMap;
 
 public class Shape {

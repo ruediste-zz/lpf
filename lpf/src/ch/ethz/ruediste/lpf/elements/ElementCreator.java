@@ -11,8 +11,6 @@ import ch.ethz.ruediste.lpf.Template;
 import ch.ethz.ruediste.lpf.UntypedCreator;
 import ch.ethz.ruediste.lpf.binding.Binding;
 import ch.ethz.ruediste.lpf.binding.BindingMode;
-import ch.ethz.ruediste.lpf.elements.ElementCreator.BorderCreator;
-import ch.ethz.ruediste.lpf.elements.ElementCreator.BorderCreatorBase;
 
 public class ElementCreator {
 

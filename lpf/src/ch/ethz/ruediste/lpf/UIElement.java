@@ -1,13 +1,12 @@
 package ch.ethz.ruediste.lpf;
 
 import java.awt.Graphics2D;
-
 import ch.ethz.ruediste.lpf.event.IWeakEvent;
 import ch.ethz.ruediste.lpf.event.WeakEvent;
 import ch.ethz.ruediste.lpf.event.WeakEventListener;
 import ch.ethz.ruediste.lpf.shape.IShape;
 
-public abstract class UIElement<T> extends DependencyObject implements IUIElement, INotifyPropertyChanged {
+public abstract  class UIElement<T> extends DependencyObject implements IUIElement, INotifyPropertyChanged {
 	private IShape actualShape;
 	private IShape desiredShape;
 	private WeakEventListener eventListener=new WeakEventListener();
